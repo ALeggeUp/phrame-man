@@ -18,6 +18,9 @@
 
 package com.aleggeup.util;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.HelpFormatter;
@@ -36,6 +39,9 @@ public class App {
         final CommandLineParser parser = new PosixParser();
         final Options options = buildOptions();
 
+        File sourceFile = null;
+        File targetFile = null;
+
         try {
             final CommandLine commandLine = parser.parse(options, args);
 
@@ -44,16 +50,30 @@ public class App {
                 System.exit(0);
             }
 
+            if (commandLine.hasOption('s')) {
+                sourceFile = new File(commandLine.getOptionValue('s')).getCanonicalFile();
+            }
+
+            if (commandLine.hasOption('t')) {
+                targetFile = new File(commandLine.getOptionValue('t')).getCanonicalFile();
+            }
+
         } catch (final ParseException e) {
             printHelp(options);
             System.exit(-1);
+        } catch (final IOException e) {
+            e.printStackTrace();
+        }
+
         }
     }
 
     private static Options buildOptions() {
         final Options options = new Options();
 
-        options.addOption(AppOptions.help);
+        options.addOption(AppOptions.SOURCE_DIR);
+        options.addOption(AppOptions.TARGET_DIR);
+        options.addOption(AppOptions.HELP);
 
         return options;
     }

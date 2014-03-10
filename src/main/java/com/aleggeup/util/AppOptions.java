@@ -40,8 +40,14 @@ public final class AppOptions {
      * This is a standard "help" option
      */
     @SuppressWarnings("static-access")
-    protected static final Option help = OptionBuilder.withLongOpt("help").hasArg(false)
+    protected static final Option HELP = OptionBuilder.withLongOpt("help").hasArg(false)
             .withDescription("Print this help").create('h');
 
+    @SuppressWarnings("static-access")
+    protected static final Option SOURCE_DIR = OptionBuilder.withLongOpt("source").hasArg(true).withArgName("DIR")
+            .withDescription("Source directory").isRequired().create('s');
 
+    @SuppressWarnings("static-access")
+    protected static final Option TARGET_DIR = OptionBuilder.withLongOpt("target").hasArg(true).withArgName("DIR")
+            .withDescription("Target directory").isRequired().create('t');
 }

@@ -41,10 +41,12 @@ public class App {
 
             if (commandLine.hasOption('h')) {
                 printHelp(options);
+                System.exit(0);
             }
 
         } catch (final ParseException e) {
             printHelp(options);
+            System.exit(-1);
         }
     }
 

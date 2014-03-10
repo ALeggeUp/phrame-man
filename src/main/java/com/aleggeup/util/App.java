@@ -39,7 +39,7 @@ public class App {
         try {
             final CommandLine commandLine = parser.parse(options, args);
 
-            if (commandLine.hasOption('h') || commandLine.getOptions().length == 0) {
+            if (commandLine.getOptions().length == 0 || commandLine.hasOption('h')) {
                 printHelp(options);
                 System.exit(0);
             }

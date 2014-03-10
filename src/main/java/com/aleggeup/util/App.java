@@ -39,7 +39,7 @@ public class App {
         try {
             final CommandLine commandLine = parser.parse(options, args);
 
-            if (commandLine.hasOption('h')) {
+            if (commandLine.hasOption('h') || commandLine.getOptions().length == 0) {
                 printHelp(options);
                 System.exit(0);
             }
@@ -60,7 +60,9 @@ public class App {
 
     private static void printHelp(final Options options) {
         final HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp( "image-organizer", options );
+
+        formatter.setLeftPadding(4);
+        formatter.printHelp("phrame-man", AppOptions.HELP_HEADER, options, AppOptions.HELP_FOOTER, true);
     }
 
 }

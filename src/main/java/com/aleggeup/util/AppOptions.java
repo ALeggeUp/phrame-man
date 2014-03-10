@@ -26,9 +26,22 @@ import org.apache.commons.cli.OptionBuilder;
  */
 public final class AppOptions {
 
+    protected static final String HELP_HEADER = "Specify options for working with photos\n";
+    protected static final String HELP_FOOTER = "\n"
+            + "Copyright 2014 [A Legge Up Consulting]\n"
+            + "Licensed under the Apache License, Version 2.0\n"
+            + "* \n"
+            + "Please report issues at https://github.com/ALeggeUp/phrame-man/issues\n";
+
     private AppOptions() {
     }
 
+    /**
+     * This is a standard "help" option
+     */
     @SuppressWarnings("static-access")
-    protected static final Option help = OptionBuilder.withLongOpt("help").hasArg(false).create('h');
+    protected static final Option help = OptionBuilder.withLongOpt("help").hasArg(false)
+            .withDescription("Print this help").create('h');
+
+
 }

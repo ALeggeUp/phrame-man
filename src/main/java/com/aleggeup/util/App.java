@@ -18,15 +18,47 @@
 
 package com.aleggeup.util;
 
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
+import org.apache.commons.cli.PosixParser;
+
 /**
- * Hello world!
+ * Starter application
  * 
  * @author Stephen Legge
  */
 public class App {
 
-	public static void main(final String[] args) {
-		System.out.println("Hello World!");
-	}
+    public static void main(final String[] args) {
+        final CommandLineParser parser = new PosixParser();
+        final Options options = buildOptions();
+
+        try {
+            final CommandLine commandLine = parser.parse(options, args);
+
+            if (commandLine.hasOption('h')) {
+                printHelp(options);
+            }
+
+        } catch (final ParseException e) {
+            printHelp(options);
+        }
+    }
+
+    private static Options buildOptions() {
+        final Options options = new Options();
+
+        options.addOption(AppOptions.help);
+
+        return options;
+    }
+
+    private static void printHelp(final Options options) {
+        final HelpFormatter formatter = new HelpFormatter();
+        formatter.printHelp( "image-organizer", options );
+    }
 
 }

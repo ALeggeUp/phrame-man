@@ -1,5 +1,8 @@
-# PhrameMan
-## (Ph)oto F(rame) (Man)ager
+PhrameMan
+=========
+### (Ph)oto F(rame) (Man)ager
+
+This project is intended to be a handy command-line utility to organize photos for a photo frame.
 
 ## License
 

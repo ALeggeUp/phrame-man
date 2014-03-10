@@ -1,4 +1,7 @@
-# image organizer
+# PhrameMan
+## (Ph)oto F(rame) (Man)ager
+
+## License
 
 The code in this project is Open Source under the [Apache 2.0 License][].
 

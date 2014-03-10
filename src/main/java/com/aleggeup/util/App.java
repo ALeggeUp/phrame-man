@@ -20,6 +20,8 @@ package com.aleggeup.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Collection;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -27,6 +29,17 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.PosixParser;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOCase;
+import org.apache.commons.io.filefilter.SuffixFileFilter;
+import org.apache.commons.io.filefilter.TrueFileFilter;
+import org.apache.tika.Tika;
+import org.apache.tika.exception.TikaException;
+import org.apache.tika.metadata.Metadata;
+import org.apache.tika.parser.AutoDetectParser;
+import org.apache.tika.parser.ParseContext;
+import org.apache.tika.sax.BodyContentHandler;
+import org.xml.sax.SAXException;
 
 /**
  * Starter application
@@ -65,7 +78,38 @@ public class App {
             e.printStackTrace();
         }
 
+        System.out.println("source: " + sourceFile.getAbsolutePath());
+        Collection<File> files = FileUtils.listFiles(sourceFile,
+                new SuffixFileFilter(".jpg", IOCase.INSENSITIVE),
+                TrueFileFilter.INSTANCE);
+        for (final File file : files) {
+            try {
+                final InputStream inputStream = FileUtils.openInputStream(file);
+                final Metadata metadata = new Metadata();
+                final BodyContentHandler contentHandler = new BodyContentHandler();
+                final AutoDetectParser fileParser = new AutoDetectParser();
+                final String mimeType = new Tika().detect(file);
+                metadata.set(Metadata.CONTENT_TYPE, mimeType);
+                fileParser.parse(inputStream, contentHandler, metadata, new ParseContext());
+                inputStream.close();
+                System.out.println(file.getAbsolutePath() + " : " + mimeType);
+                for (final String name : metadata.names()) {
+                    System.out.println(name + " : " + metadata.get(name));
+                }
+                System.out.println(contentHandler.toString());
+
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (SAXException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (TikaException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
+        System.out.println("target: " + targetFile.getAbsolutePath());
     }
 
     private static Options buildOptions() {

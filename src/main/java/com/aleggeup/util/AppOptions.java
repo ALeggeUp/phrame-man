@@ -26,9 +26,9 @@ import org.apache.commons.cli.OptionBuilder;
  */
 public final class AppOptions {
 
-	private AppOptions() {
-	}
+    private AppOptions() {
+    }
 
-	@SuppressWarnings("static-access")
-	protected static final Option help = OptionBuilder.withLongOpt("help").hasArg(false).isRequired().create('h');
+    @SuppressWarnings("static-access")
+    protected static final Option help = OptionBuilder.withLongOpt("help").hasArg(false).create('h');
 }

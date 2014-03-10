@@ -37,6 +37,7 @@
   <dependencies>
 
     <!-- Apache Tika -->
+    <!--
     <dependency>
       <groupId>org.apache.tika</groupId>
       <artifactId>tika-core</artifactId>
@@ -48,8 +49,10 @@
       <artifactId>tika-parsers</artifactId>
       <version>1.5</version>
     </dependency>
+    -->
 
     <!-- Apache Commons -->
+    <!--
     <dependency>
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
@@ -61,6 +64,7 @@
       <artifactId>commons-lang3</artifactId>
       <version>3.2.1</version>
     </dependency>
+    -->
 
     <dependency>
       <groupId>commons-cli</groupId>
